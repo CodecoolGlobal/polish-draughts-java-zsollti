@@ -2,8 +2,8 @@ package Pawn;
 public class Pawn {
     String color;
 
-    public Pawn(String lightOrDark){
-        color = lightOrDark;
+    public Pawn(String whiteOrBlack){
+        color = whiteOrBlack;
     }
     public String getColor(){
         return this.color;
