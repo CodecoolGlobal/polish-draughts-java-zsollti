@@ -73,11 +73,12 @@ public class Game {
         int[] indexes = new int[2];
         indexes[0] = (int)input.charAt(0) - 97;
         if(input.length() == 2){
-            indexes[1] = input.charAt(1) - 1;
+            indexes[1] = (input.charAt(1) - '0') - 1;
         }
         else{
-            indexes[1] = Integer.parseInt(input.substring(1,2)) - 1;
+            indexes[1] = Integer.parseInt(input.substring(1,3)) - 1;
         }
+        System.out.println("indexX: " + indexes[0] + " indexY: " + indexes[1]);
         return indexes;
     }
 
