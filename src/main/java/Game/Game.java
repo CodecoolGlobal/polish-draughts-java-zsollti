@@ -48,7 +48,7 @@ public class Game {
     private void printBoard(Player POne, Player PTwo){
         System.out.flush();
         POne.printName();
-        this.board.toString();
+        System.out.println(this.board.toString());
         PTwo.printName();
     }
 
@@ -62,7 +62,7 @@ public class Game {
     private boolean isPawnAtIndex(int[] indexes){
         Pawn pawn = board.getPawn(indexes[0], indexes[1]);
         if(pawn != null){
-            if(pawn.getColor() == actualPlayer.getColor()){
+            if(pawn.getColor() == "white"){
                 return true;
             }
         }
@@ -85,6 +85,7 @@ public class Game {
         boolean isInputValid = false;
         int[] indexes = new int[2];
         while(!isInputValid){
+            System.out.println("Choose your pawn: ");
             Scanner scanner = new Scanner(System.in);
             String coordinate = scanner.nextLine();
             coordinate = coordinate.toLowerCase();
@@ -102,6 +103,7 @@ public class Game {
         boolean isInputValid = false;
         int[] indexes = new int[2];
         while(!isInputValid){
+            System.out.println("Choose destination: ");
             Scanner scanner = new Scanner(System.in);
             String coordinate = scanner.nextLine();
             coordinate = coordinate.toLowerCase();

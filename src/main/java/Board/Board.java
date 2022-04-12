@@ -2,7 +2,6 @@ package Board;
 
 import Pawn.Pawn;
 
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Board {
@@ -85,7 +84,8 @@ public class Board {
         return board;
     }
 
-    public void printBoard() {
+    @Override
+    public String toString() {
         int whitePawnCode = (int) 0x26AB;
         String circle = Character.toString((char) whitePawnCode);
         char[] abc = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
@@ -123,7 +123,15 @@ public class Board {
             }
             displayBoard.append("\n");
         }
-        System.out.println(displayBoard);
+        return displayBoard.toString();
+    }
+
+    public int size(){
+        return this.n;
+    }
+
+    public Pawn getPawn(int x, int y){
+        return board[x][y];
     }
 }
 
