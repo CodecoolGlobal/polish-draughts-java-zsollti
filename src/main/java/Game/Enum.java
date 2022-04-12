@@ -3,7 +3,8 @@ package Game;
 public class Enum {
     public enum Color {
         BLACK,
-        WHITE
+        WHITE,
+        BLUE
     }
     public enum Direction {
         UP,

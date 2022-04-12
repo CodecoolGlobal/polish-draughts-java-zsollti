@@ -28,8 +28,9 @@ public class Game {
             int[] startPos = this.getStartingPosition();
             int[] endPos = this.getEndingPosition();
             this.tryToMakeMove(startPos, endPos);
-
-
+            if(checkForWinner() != Color.BLUE){
+                isGameOn = false;
+            }
         }
     }
 
@@ -46,13 +47,13 @@ public class Game {
 
     }
 
-    public String checkForWinner(){
+    public Color checkForWinner(){
         boolean hasBlack = false;
         boolean hasWhite = false;
         for(int i = 0; i < this.board.size(); i++){
             for(int j = 0; j < this.board.size(); j ++){
                 if(this.board.getBoard()[i][j] != null ){
-                    if(this.board.getBoard()[i][j].getColor() == "black"){
+                    if(this.board.getBoard()[i][j].getColor() == Color.BLACK){
                         hasBlack = true;
                     }else{
                         hasWhite = true;
@@ -61,11 +62,11 @@ public class Game {
             }
         }
         if (!hasBlack) {
-            return "white";
+            return Color.WHITE;
         }else if (!hasWhite){
-            return "black";
+            return Color.BLACK;
         }else{
-            return "";
+            return Color.BLUE;
         }
     }
 
