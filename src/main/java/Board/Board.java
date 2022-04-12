@@ -10,7 +10,7 @@ public class Board {
     private Scanner scanner;
     private int n;
 
-    Board() {
+    public Board() {
         scanner = new Scanner(System.in);
         System.out.println("Type a number between 10 and 20: ");
         String input = scanner.nextLine();
@@ -85,7 +85,7 @@ public class Board {
         return board;
     }
 
-    public static void printBoard(Pawn[][] board) {
+    public void printBoard() {
         int whitePawnCode = (int) 0x26AB;
         String circle = Character.toString((char) whitePawnCode);
         char[] abc = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
@@ -104,7 +104,8 @@ public class Board {
                 if (board[row][col] == null) {
                     if ((row + col) % 2 == 0) {
                         displayBoard.append("\u001b[47;1m" + "   " + "\u001b[0m");
-                    } else {
+
+                    }else {
                         displayBoard.append("   ");
                     }
                 } else {
