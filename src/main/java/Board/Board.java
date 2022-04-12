@@ -105,11 +105,13 @@ public class Board {
                     if ((row + col) % 2 == 0) {
                         displayBoard.append("\u001b[47;1m" + "   " + "\u001b[0m");
 
+
                     }else {
                         displayBoard.append("   ");
+
                     }
                 } else {
-                    switch (board[row][col].toString()) {
+                    switch (board[row][col].getColor()) {
                         case "black":
                             displayBoard.append("\u001b[33m" + " ").append(circle).append(" ").append("\u001b[0m");
                             break;
