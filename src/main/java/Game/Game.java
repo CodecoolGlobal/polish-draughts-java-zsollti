@@ -41,8 +41,27 @@ public class Game {
 
     }
 
-    public void checkForWinner(){
-
+    public String checkForWinner(){
+        boolean hasBlack = false;
+        boolean hasWhite = false;
+        for(int i = 0; i < this.board.size(); i++){
+            for(int j = 0; j < this.board.size(); j ++){
+                if(this.board.getBoard()[i][j] != null ){
+                    if(this.board.getBoard()[i][j].getColor() == "black"){
+                        hasBlack = true;
+                    }else{
+                        hasWhite = true;
+                    }
+                }
+            }
+        }
+        if (!hasBlack) {
+            return "white";
+        }else if (!hasWhite){
+            return "black";
+        }else{
+            return "";
+        }
     }
 
     private void printBoard(Player POne, Player PTwo){
