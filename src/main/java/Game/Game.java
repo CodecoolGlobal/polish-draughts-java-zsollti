@@ -3,8 +3,7 @@ package Game;
 import Board.Board;
 import Pawn.Pawn;
 import Player.Player;
-import static Player.Player.Color.*;
-import static Player.Player.Direction.*;
+import Game.Enum.Color;
 
 import java.util.Scanner;
 
@@ -21,20 +20,26 @@ public class Game {
     }
     public void start(){
         this.isGameOn = true;
-        Player POne = new Player(WHITE);
-        Player PTwo = new Player(BLACK);
+        Player POne = new Player(Color.WHITE);
+        Player PTwo = new Player(Color.BLACK);
         while(isGameOn){
-            this.actualPlayer = POne;
-            this.printBoard(POne, PTwo);
+            changeActualPlayer(POne, PTwo);
+            this.printBoard();
             int[] startPos = this.getStartingPosition();
             int[] endPos = this.getEndingPosition();
             this.tryToMakeMove(startPos, endPos);
 
+
         }
     }
 
-    public void playRound(){
-
+    public void changeActualPlayer(Player p1, Player p2){
+        if(actualPlayer == p1){
+            actualPlayer = p2;
+        }
+        else {
+            actualPlayer = p1;
+        }
     }
 
     public void tryToMakeMove(int[] startingPos, int[] endingPos){
@@ -45,11 +50,9 @@ public class Game {
 
     }
 
-    private void printBoard(Player POne, Player PTwo){
-        System.out.flush();
-        POne.printName();
+    private void printBoard(){
+        actualPlayer.printName();
         System.out.println(this.board.toString());
-        PTwo.printName();
     }
 
     private boolean isIndexesValid(int[] indexes){
@@ -62,7 +65,7 @@ public class Game {
     private boolean isPawnAtIndex(int[] indexes){
         Pawn pawn = board.getPawn(indexes[0], indexes[1]);
         if(pawn != null){
-            if(pawn.getColor() == "white"){
+            if(pawn.getColor() == actualPlayer.getColor()){
                 return true;
             }
         }
@@ -78,7 +81,6 @@ public class Game {
         else{
             indexes[1] = Integer.parseInt(input.substring(1,3)) - 1;
         }
-        System.out.println("indexX: " + indexes[0] + " indexY: " + indexes[1]);
         return indexes;
     }
 

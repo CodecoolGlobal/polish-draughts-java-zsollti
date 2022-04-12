@@ -1,16 +1,18 @@
 package Pawn;
 
+import Game.Enum;
+
 public class Pawn {
 
-    private String color;
+    private Enum.Color color;
     private Coordinates position;
 
-    public Pawn(String whiteOrBlack, int x, int y) {
-        color = whiteOrBlack;
-        position = new Coordinates(x, y);
+    public Pawn(Enum.Color whiteOrBlack, int x, int y) {
+        this.color = whiteOrBlack;
+        this.position = new Coordinates(x, y);
     }
 
-    public String getColor() {
+    public Enum.Color getColor() {
         return this.color;
     }
 

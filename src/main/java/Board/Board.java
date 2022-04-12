@@ -1,20 +1,20 @@
 package Board;
 
 import Pawn.Pawn;
-
+import Game.Enum.Color;
 import java.util.Scanner;
 
 public class Board {
     private Pawn[][] board;
     private Scanner scanner;
-    private int n;
+    private int size;
 
     public Board() {
         scanner = new Scanner(System.in);
         System.out.println("Type a number between 10 and 20: ");
         String input = scanner.nextLine();
-        n = Integer.parseInt(input);
-
+        int n = Integer.parseInt(input);
+        this.size = n;
         while (n < 10 || n > 20) {
             System.out.println("Not a valid input please try again: ");
             input = scanner.nextLine();
@@ -34,14 +34,14 @@ public class Board {
             if ((row - 1) % 2 == 0) {
                 for (int i = 0; i < board[row].length; i += 2) {
                     if (whitePlaces > 0) {
-                        board[row][i] = new Pawn("white", row, i);
+                        board[row][i] = new Pawn(Color.WHITE, row, i);
                         whitePlaces--;
                     }
                 }
             } else {
                 for (int i = 1; i < board[row].length; i += 2) {
                     if (whitePlaces > 0) {
-                        board[row][i] = new Pawn("white", row, i);
+                        board[row][i] = new Pawn(Color.WHITE, row, i);
                         whitePlaces--;
                     }
                 }
@@ -56,14 +56,14 @@ public class Board {
             if ((row + 1) % 2 == 0) {
                 for (int i = 0; i < board[row].length; i += 2) {
                     if (blackPlaces > 0) {
-                        board[row][i] = new Pawn("black", row, i);
+                        board[row][i] = new Pawn(Color.BLACK, row, i);
                         blackPlaces--;
                     }
                 }
             } else {
                 for (int i = 1; i < board[row].length; i += 2) {
                     if (blackPlaces > 0) {
-                        board[row][i] = new Pawn("black", row, i);
+                        board[row][i] = new Pawn(Color.BLACK, row, i);
                         blackPlaces--;
                     }
                 }
@@ -111,13 +111,11 @@ public class Board {
 
                     }
                 } else {
-                    switch (board[row][col].getColor()) {
-                        case "black":
-                            displayBoard.append("\u001b[36m" + " ").append(circle).append(" ").append("\u001b[0m");
-                            break;
-                        case "white":
-                            displayBoard.append(" ").append(circle).append(" ");
-                            break;
+                    if(board[row][col].getColor() == Color.BLACK){
+                        displayBoard.append("\u001b[36m" + " ").append(circle).append(" ").append("\u001b[0m");
+                    }
+                    else{
+                        displayBoard.append(" ").append(circle).append(" ");
                     }
                 }
             }
@@ -127,7 +125,7 @@ public class Board {
     }
 
     public int size(){
-        return this.n;
+        return this.size;
     }
 
     public Pawn getPawn(int x, int y){
