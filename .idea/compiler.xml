@@ -9,8 +9,5 @@
         <module name="polish-draughts-java-zsollti" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="polish-draughts-java-zsollti" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
