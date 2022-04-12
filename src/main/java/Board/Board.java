@@ -24,7 +24,8 @@ public class Board {
         board = setPawns(new Pawn[n][n], n);
     }
 
-    private Pawn[][] setPawns(Pawn[][] board, int n) {
+    private Pawn[][] setPawns(Pawn[][] board, int n)
+    {
         return setWhitePawns(setBlackPawns(board, n), n);
     }
 
@@ -72,23 +73,54 @@ public class Board {
         return board;
     }
 
-    private void setWhite(Pawn[][] board, int n)
-    {
+    private void setWhite(Pawn[][] board, int n) {
         int places = n * 2;
     }
 
-    public void setBoard(Pawn[][] board)
-    {
+    public void setBoard(Pawn[][] board) {
         this.board = board;
     }
-    public Pawn[][] getBoard()
-    {
+
+    public Pawn[][] getBoard() {
         return board;
     }
 
-    public static void printBoard(Pawn[][] board)
-    {
+    public static void printBoard(Pawn[][] board) {
+        int whitePawnCode = (int) 0x26AB;
+        String circle = Character.toString((char) whitePawnCode);
         char[] abc = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        StringBuilder displayBoard = new StringBuilder("    ");
+        for (int row = 0; row < board.length; row++) {
+            if (row < 9) {
+                displayBoard.append(row + 1).append("  ");
+            } else {
+                displayBoard.append(row + 1).append(" ");
+            }
+        }
+        displayBoard.append("\n");
+        for (int row = 0; row < board.length; row++) {
+            displayBoard.append(abc[row]).append("  ");
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] == null) {
+                    if ((row + col) % 2 == 0) {
+                        displayBoard.append("\u001b[47;1m" + "   " + "\u001b[0m");
+                    } else {
+                        displayBoard.append("   ");
+                    }
+                } else {
+                    switch (board[row][col].toString()) {
+                        case "black":
+                            displayBoard.append("\u001b[33m" + " ").append(circle).append(" ").append("\u001b[0m");
+                            break;
+                        case "white":
+                            displayBoard.append(" ").append(circle).append(" ");
+                            break;
+                    }
+                }
+            }
+            displayBoard.append("\n");
+        }
+        System.out.println(displayBoard);
     }
 }
 
