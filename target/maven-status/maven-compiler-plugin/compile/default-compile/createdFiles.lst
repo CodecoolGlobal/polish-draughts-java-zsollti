@@ -1,0 +1,8 @@
+Player/Player.class
+Main/Main.class
+Board/Board.class
+Pawn/Pawn$Coordinates.class
+Player/Player$Direction.class
+Player/Player$Color.class
+Pawn/Pawn.class
+Game/Game.class

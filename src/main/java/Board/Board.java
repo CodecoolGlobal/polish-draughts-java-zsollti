@@ -113,7 +113,7 @@ public class Board {
                 } else {
                     switch (board[row][col].getColor()) {
                         case "black":
-                            displayBoard.append("\u001b[33m" + " ").append(circle).append(" ").append("\u001b[0m");
+                            displayBoard.append("\u001b[36m" + " ").append(circle).append(" ").append("\u001b[0m");
                             break;
                         case "white":
                             displayBoard.append(" ").append(circle).append(" ");
