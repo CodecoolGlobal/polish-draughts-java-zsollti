@@ -51,7 +51,7 @@ public class Game {
                 if(endPos[0] - startPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1){
                     Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
                     if(pawn == null){
-                        //ToDo nincs rajta pawn
+                        this.board.movePawn(startPos, endPos);
                         invalidMove = false;
 
                     }
@@ -66,7 +66,7 @@ public class Game {
                 if(startPos[0] - endPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1){
                     Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
                     if(pawn == null){
-                        //ToDo nincs rajta pawn
+                        this.board.movePawn(startPos, endPos);
                         invalidMove = false;
 
                     }
