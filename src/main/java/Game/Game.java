@@ -44,73 +44,58 @@ public class Game {
 
     public void tryToMakeMove(){
         boolean invalidMove = true;
+
         while (invalidMove){
+
             int[] startPos = this.getStartingPosition();
             int[] endPos = this.getEndingPosition();
-            if (actualPlayer.getDirection() == DOWN){
-                if(endPos[0] - startPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1){
-                    Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
-                    if(pawn == null){
-                        this.board.movePawn(startPos, endPos);
-                        invalidMove = false;
+
+            int verticalValue = setVerticalValue();
+            int horizontalValue = setHorizontalValue(startPos, endPos);
+
+            if(validateNeighbouring(startPos, endPos)){
+                Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
+                if(pawn == null){
+                    this.board.movePawn(startPos, endPos);
+                    invalidMove = false;
+                }
+                else if(pawn.getColor() != actualPlayer.getColor()){
+                    if(this.board.getBoard()[endPos[0]+verticalValue][endPos[1]+horizontalValue] == null){
+                        int[] nextPos = new int[2];
+                        nextPos[0] = endPos[0] + verticalValue;
+                        nextPos[1] = endPos[1] + horizontalValue;
+                        this.board.removePawn(endPos);
+                        this.board.movePawn(startPos,nextPos);
                     }
-                    else if(pawn.getColor() != actualPlayer.getColor()){
-                        if (startPos[1] - endPos[1] == 1){
-                            if(this.board.getBoard()[endPos[0]+1][endPos[1]-1] == null){
-                                int[] nextPos = new int[2];
-                                nextPos[0] = endPos[0] + 1;
-                                nextPos[1] = endPos[1] - 1;
-                                this.board.removePawn(endPos);
-                                this.board.movePawn(startPos,nextPos);
-                            }
-                        }
-                        else if(startPos[1] - endPos[1] == -1){
-                            if(this.board.getBoard()[endPos[0]+1][endPos[1]+1] == null){
-                                int[] nextPos = new int[2];
-                                nextPos[0] = endPos[0] + 1;
-                                nextPos[1] = endPos[1] + 1;
-                                this.board.removePawn(endPos);
-                                this.board.movePawn(startPos,nextPos);
-                            }
-                        }
-                        invalidMove = false;
-                    }
-                    //else van rajta pawn de nem veheti le
+                    invalidMove = false;
                 }
             }
-            else{
-                if(startPos[0] - endPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1){
-                    Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
-                    if(pawn == null){
-                        this.board.movePawn(startPos, endPos);
-                        invalidMove = false;
+        }
+    }
 
-                    }
-                    else if(pawn.getColor() != actualPlayer.getColor()){
-                        if (startPos[1] - endPos[1] == 1){
-                            if(this.board.getBoard()[endPos[0]-1][endPos[1]-1] == null){
-                                int[] nextPos = new int[2];
-                                nextPos[0] = endPos[0] - 1;
-                                nextPos[1] = endPos[1] - 1;
-                                this.board.removePawn(endPos);
-                                this.board.movePawn(startPos,nextPos);
-                            }
-                        }
-                        else if(startPos[1] - endPos[1] == -1){
-                            if(this.board.getBoard()[endPos[0]-1][endPos[1]+1] == null){
-                                int[] nextPos = new int[2];
-                                nextPos[0] = endPos[0] - 1;
-                                nextPos[1] = endPos[1] + 1;
-                                this.board.removePawn(endPos);
-                                this.board.movePawn(startPos,nextPos);
-                            }
-                        }
-                        invalidMove = false;
-                    }
-                    //else van rajta pawn de nem veheti le
-                }
+    private boolean validateNeighbouring(int[] startPos, int[] endPos){
+        if ((actualPlayer.getDirection() == DOWN && endPos[0] - startPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1) ||
+                (actualPlayer.getDirection() == UP && startPos[0] - endPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1)) {
+            return true;
+        }
+        return false;
+    }
 
-            }
+    private int setHorizontalValue(int[] startPos, int[] endPos){
+        if(startPos[1] - endPos[1] == 1){
+            return -1;
+        }
+        else{
+            return 1;
+        }
+    }
+
+    private int setVerticalValue(){
+        if(actualPlayer.getDirection() == DOWN) {
+            return 1;
+        }
+        else {
+            return -1;
         }
     }
 
