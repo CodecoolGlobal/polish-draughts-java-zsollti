@@ -130,5 +130,16 @@ public class Board {
     public Pawn getPawn(int x, int y){
         return board[x][y];
     }
+    public void removePawn(int[] index)
+    {
+        Pawn pawn = this.board[index[0]][index[1]];
+        this.board[index[0]][index[1]] = null;
+    }
+    public  void movePawn(int[] where, int[] to)
+    {
+        Pawn pawn = this.board[where[0]][where[1]];
+        this.board[where[0]][where[1]] = null;
+        this.board[to[0]][to[1]] = pawn;
+    }
 }
 
