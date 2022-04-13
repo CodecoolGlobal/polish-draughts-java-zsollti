@@ -53,10 +53,26 @@ public class Game {
                     if(pawn == null){
                         this.board.movePawn(startPos, endPos);
                         invalidMove = false;
-
                     }
                     else if(pawn.getColor() != actualPlayer.getColor()){
-                        //ToDo van rajta pawn és leveheti
+                        if (startPos[1] - endPos[1] == 1){
+                            if(this.board.getBoard()[endPos[0]+1][endPos[1]-1] == null){
+                                int[] nextPos = new int[2];
+                                nextPos[0] = endPos[0] + 1;
+                                nextPos[1] = endPos[1] - 1;
+                                this.board.removePawn(endPos);
+                                this.board.movePawn(startPos,nextPos);
+                            }
+                        }
+                        else if(startPos[1] - endPos[1] == -1){
+                            if(this.board.getBoard()[endPos[0]+1][endPos[1]+1] == null){
+                                int[] nextPos = new int[2];
+                                nextPos[0] = endPos[0] + 1;
+                                nextPos[1] = endPos[1] + 1;
+                                this.board.removePawn(endPos);
+                                this.board.movePawn(startPos,nextPos);
+                            }
+                        }
                         invalidMove = false;
                     }
                     //else van rajta pawn de nem veheti le
@@ -71,7 +87,24 @@ public class Game {
 
                     }
                     else if(pawn.getColor() != actualPlayer.getColor()){
-                        //ToDo van rajta pawn és leveheti
+                        if (startPos[1] - endPos[1] == 1){
+                            if(this.board.getBoard()[endPos[0]-1][endPos[1]-1] == null){
+                                int[] nextPos = new int[2];
+                                nextPos[0] = endPos[0] - 1;
+                                nextPos[1] = endPos[1] - 1;
+                                this.board.removePawn(endPos);
+                                this.board.movePawn(startPos,nextPos);
+                            }
+                        }
+                        else if(startPos[1] - endPos[1] == -1){
+                            if(this.board.getBoard()[endPos[0]-1][endPos[1]+1] == null){
+                                int[] nextPos = new int[2];
+                                nextPos[0] = endPos[0] - 1;
+                                nextPos[1] = endPos[1] + 1;
+                                this.board.removePawn(endPos);
+                                this.board.movePawn(startPos,nextPos);
+                            }
+                        }
                         invalidMove = false;
                     }
                     //else van rajta pawn de nem veheti le
@@ -166,9 +199,7 @@ public class Game {
             coordinate = coordinate.toLowerCase();
             indexes = convertCoordinateToIndexes(coordinate);
             if(isIndexesValid(indexes)){
-                if(board.getPawn(indexes[0], indexes[1]) == null){
-                    isInputValid = true;
-                }
+                isInputValid = true;
             }
         }
         return indexes;
