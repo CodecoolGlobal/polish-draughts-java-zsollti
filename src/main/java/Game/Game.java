@@ -3,7 +3,8 @@ package Game;
 import Board.Board;
 import Pawn.Pawn;
 import Player.Player;
-import Game.Enum.Color;
+import static Game.Enum.Color.*;
+import static Game.Enum.Direction.*;
 
 import java.util.Scanner;
 
@@ -20,15 +21,13 @@ public class Game {
     }
     public void start(){
         this.isGameOn = true;
-        Player POne = new Player(Color.WHITE);
-        Player PTwo = new Player(Color.BLACK);
+        Player POne = new Player(WHITE);
+        Player PTwo = new Player(BLACK);
         while(isGameOn){
             changeActualPlayer(POne, PTwo);
             this.printBoard();
-            int[] startPos = this.getStartingPosition();
-            int[] endPos = this.getEndingPosition();
-            this.tryToMakeMove(startPos, endPos);
-            if(checkForWinner() != Color.BLUE){
+            this.tryToMakeMove();
+            if(checkForWinner() != BLUE){
                 isGameOn = false;
             }
         }
@@ -43,17 +42,36 @@ public class Game {
         }
     }
 
-    public void tryToMakeMove(int[] startingPos, int[] endingPos){
+    public void tryToMakeMove(){
+        boolean invalidMove = true;
+        while (invalidMove){
+            int[] startPos = this.getStartingPosition();
+            int[] endPos = this.getEndingPosition();
+            if (actualPlayer.getDirection() == DOWN){
+                if(endPos[0] - startPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1){
+                    Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
+                    if(pawn == null){
+                        //ToDo nincs rajta pawn
+                        invalidMove = false;
 
+                    }
+                    else if(pawn.getColor() != actualPlayer.getColor()){
+                        //ToDo van rajta pawn és leveheti
+                        invalidMove = false;
+                    }
+                    //else van rajta pawn de nem veheti le
+                }
+            }
+        }
     }
 
-    public Color checkForWinner(){
+    public Enum.Color checkForWinner(){
         boolean hasBlack = false;
         boolean hasWhite = false;
         for(int i = 0; i < this.board.size(); i++){
             for(int j = 0; j < this.board.size(); j ++){
                 if(this.board.getBoard()[i][j] != null ){
-                    if(this.board.getBoard()[i][j].getColor() == Color.BLACK){
+                    if(this.board.getBoard()[i][j].getColor() == BLACK){
                         hasBlack = true;
                     }else{
                         hasWhite = true;
@@ -62,11 +80,11 @@ public class Game {
             }
         }
         if (!hasBlack) {
-            return Color.WHITE;
+            return WHITE;
         }else if (!hasWhite){
-            return Color.BLACK;
+            return BLACK;
         }else{
-            return Color.BLUE;
+            return BLUE;
         }
     }
 

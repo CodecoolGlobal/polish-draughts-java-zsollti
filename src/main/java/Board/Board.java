@@ -1,16 +1,15 @@
 package Board;
 
 import Pawn.Pawn;
-import Game.Enum.Color;
+import static Game.Enum.Color.*;
 import java.util.Scanner;
 
 public class Board {
     private Pawn[][] board;
-    private Scanner scanner;
-    private int size;
+    private final int size;
 
     public Board() {
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Type a number between 10 and 20: ");
         String input = scanner.nextLine();
         int n = Integer.parseInt(input);
@@ -34,14 +33,14 @@ public class Board {
             if ((row - 1) % 2 == 0) {
                 for (int i = 0; i < board[row].length; i += 2) {
                     if (whitePlaces > 0) {
-                        board[row][i] = new Pawn(Color.WHITE, row, i);
+                        board[row][i] = new Pawn(WHITE, row, i);
                         whitePlaces--;
                     }
                 }
             } else {
                 for (int i = 1; i < board[row].length; i += 2) {
                     if (whitePlaces > 0) {
-                        board[row][i] = new Pawn(Color.WHITE, row, i);
+                        board[row][i] = new Pawn(WHITE, row, i);
                         whitePlaces--;
                     }
                 }
@@ -56,14 +55,14 @@ public class Board {
             if ((row + 1) % 2 == 0) {
                 for (int i = 0; i < board[row].length; i += 2) {
                     if (blackPlaces > 0) {
-                        board[row][i] = new Pawn(Color.BLACK, row, i);
+                        board[row][i] = new Pawn(BLACK, row, i);
                         blackPlaces--;
                     }
                 }
             } else {
                 for (int i = 1; i < board[row].length; i += 2) {
                     if (blackPlaces > 0) {
-                        board[row][i] = new Pawn(Color.BLACK, row, i);
+                        board[row][i] = new Pawn(BLACK, row, i);
                         blackPlaces--;
                     }
                 }
@@ -111,7 +110,7 @@ public class Board {
 
                     }
                 } else {
-                    if(board[row][col].getColor() == Color.BLACK){
+                    if(board[row][col].getColor() == BLACK){
                         displayBoard.append("\u001b[36m" + " ").append(circle).append(" ").append("\u001b[0m");
                     }
                     else{

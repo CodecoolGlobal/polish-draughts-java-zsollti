@@ -1,7 +1,10 @@
 package Player;
 
-import java.util.Scanner;
 import Game.Enum;
+
+import java.util.Scanner;
+import static Game.Enum.Color.*;
+import static Game.Enum.Direction.*;
 
 public class Player {
     private final String name;
@@ -12,11 +15,11 @@ public class Player {
         Scanner scanner = new Scanner(System.in);
         this.name = scanner.nextLine();
         this.color = color;
-        if(color == Enum.Color.WHITE){
-            this.direction = Enum.Direction.DOWN;
+        if(color == WHITE){
+            this.direction = UP;
         }
         else{
-            this.direction = Enum.Direction.UP;
+            this.direction = DOWN;
         }
         System.out.flush();
     }
