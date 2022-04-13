@@ -62,6 +62,22 @@ public class Game {
                     //else van rajta pawn de nem veheti le
                 }
             }
+            else{
+                if(startPos[0] - endPos[0] == 1 && Math.abs(startPos[1] - endPos[1]) == 1){
+                    Pawn pawn = this.board.getBoard()[endPos[0]][endPos[1]];
+                    if(pawn == null){
+                        //ToDo nincs rajta pawn
+                        invalidMove = false;
+
+                    }
+                    else if(pawn.getColor() != actualPlayer.getColor()){
+                        //ToDo van rajta pawn és leveheti
+                        invalidMove = false;
+                    }
+                    //else van rajta pawn de nem veheti le
+                }
+
+            }
         }
     }
 
